@@ -12,24 +12,27 @@ import {
   Link,
   Avatar,
   FormControl,
-  FormHelperText,
+  Text,
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import FutureView from "../svg/futureview.svg";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const Registration = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
   return (
+    <Box>
+    <img style={{ paddingLeft: "15px" }} src={ FutureView }/>
     <Flex
       flexDirection="column"
       width="100wh"
-      height="100vh"
+      height="92vh"
       backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
@@ -40,26 +43,28 @@ const Registration = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar bg="teal.500" />
-        <Heading color="teal.400">Welcome</Heading>
+        <Avatar bg="#193e88" />
+        <Text fontSize='4xl' color="#193e88">Registration</Text>
         <Box minW={{ base: "90%", md: "468px" }}>
           <form>
             <Stack
               spacing={4}
               p="1rem"
-              backgroundColor="whiteAlpha.900"
-              boxShadow="md"
+              backgroundColor="transparent"
+              boxShadow="none"
             >
               <FormControl>
+                <Text fontWeight={"bold"}> Username * </Text>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input bg="white" placeholder="email address" />
                 </InputGroup>
               </FormControl>
               <FormControl>
+              <Text fontWeight={"bold"}> Password * </Text>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
@@ -67,6 +72,7 @@ const Registration = () => {
                     children={<CFaLock color="gray.300" />}
                   />
                   <Input
+                    bg="white"
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                   />
@@ -76,31 +82,33 @@ const Registration = () => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <FormHelperText textAlign="right">
-                  <Link>forgot password?</Link>
-                </FormHelperText>
               </FormControl>
               <Button
                 borderRadius={0}
+                bg="#AABFEE"
                 type="submit"
                 variant="solid"
                 colorScheme="teal"
                 width="full"
               >
-                Register
+                Sign up now
               </Button>
             </Stack>
           </form>
         </Box>
       </Stack>
-      <Box>
-       Already a member?{" "}
-        <Link color="teal.500" href="#">
-          Sign in
+      <Flex>
+        <Link color="#193e88" href="/login">
+          Have an account?
         </Link>
-      </Box>
+        <Box width="140px"/>
+        <Link color="#193e88" href="#">
+          Forgot password?
+        </Link>
+      </Flex>
     </Flex>
+    </Box>
   );
 };
 
-export default Registration;
+export default Login;
