@@ -1,35 +1,31 @@
 import * as React from "react";
 import Dashboard from "./components/Dashboard";
+import Login from "./pages/login";
 
-import { BrowserRouter,  Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Registration from "./pages/registration";
 
 function App() {
   return (
     <>
-
-    <BrowserRouter forceRefresh={true}>
-    <div>
-      <li>
-        <a href="/">Home</a>
-      </li>
-      <li>
-        <a href="/login">Login</a>
-      </li>
-    </div>
-      <Switch>
-        <Route exact path ="/">
-          <Dashboard />
-        </Route>
-
-        <Route path ="/Login">
-          <p>Login page</p>
-        </Route>
-      </Switch>
-    </BrowserRouter>
-    
-      
+      <BrowserRouter forceRefresh={true}>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/registration">
+            <Registration />
+          </Route>
+          <Route path="/results">
+            <Registration />
+          </Route>
+          <Route path="/qna">
+            <Registration />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
 export default App;
