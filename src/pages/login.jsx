@@ -34,7 +34,7 @@ const Login = () => {
       <Flex
         flexDirection="column"
         width="100wh"
-        height="92vh"
+        height="70vh"
         backgroundColor="gray.200"
         justifyContent="center"
         alignItems="center"
