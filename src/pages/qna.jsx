@@ -52,7 +52,7 @@ const QNA = () => {
     };
 
     setNewQuestion();
-  }, []);
+  });
 
   useEffect(() => {
     const setNewQuestion = async () => {
