@@ -1,15 +1,9 @@
 import MicRecorder from "mic-recorder-to-mp3";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Button, Spinner, Center, Flex } from "@chakra-ui/react";
+import { Button, Center, Flex } from "@chakra-ui/react";
 import { db } from "../firebase/firebase-setup";
-import {
-  doc,
-  updateDoc,
-  getDoc,
-  getDocs,
-  collection,
-} from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import stringSimilarity from "string-similarity";
 
 // Set AssemblyAI Axios Header
