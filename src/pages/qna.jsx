@@ -21,22 +21,19 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import FutureView from "../svg/futureview.svg";
+import SpeechRecognition from "../components/SpeechRecognition";
 
 const BackArrow = chakra(FaArrowLeft);
 const ForwardArrow = chakra(FaArrowRight);
 
 const QNA = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleShowClick = () => setShowPassword(!showPassword);
-
   return (
     <Box bgColor="gray.200">
       <img style={{ paddingLeft: "15px" }} src={FutureView} />
       <Flex
         flexDirection="column"
         width="100wh"
-        height="30vh"
+        height="60vh"
         backgroundColor="gray.200"
         justifyContent="center"
         alignItems="center"
@@ -74,7 +71,9 @@ const QNA = () => {
               p="1rem"
               backgroundColor="whiteAlpha.900"
               boxShadow="md"
-            ></Stack>
+            >
+              <SpeechRecognition />
+            </Stack>
           </Box>
         </Stack>
       </Flex>
