@@ -16,6 +16,7 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import FutureView from "../svg/futureview.svg";
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -23,6 +24,7 @@ const CFaLock = chakra(FaLock);
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const history = useHistory();
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -90,6 +92,7 @@ const Login = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
+                onClick={() => history.push("/qna")}
               >
                 Sign up now
               </Button>
