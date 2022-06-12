@@ -73,7 +73,7 @@ const QNA = () => {
       >
         <Stack flexDir="row" mb="2" justifyContent="center" alignItems="center">
           <Box minW={{ md: "60px" }}>
-            <Stack
+            <Button
               onClick={() => {
                 if (questionIndex > 0) {
                   setQuestionIndex(questionIndex - 1);
@@ -81,11 +81,13 @@ const QNA = () => {
               }}
               p="1rem"
               mt="0"
+              py="1.9rem"
+              disabled={questionIndex === 0}
               backgroundColor="gray.300"
               boxShadow="md"
             >
               <BackArrow size="30px" />
-            </Stack>
+            </Button>
           </Box>
           <Box minW={{ base: "90%", md: "568px" }}>
             <Stack p="1rem" backgroundColor="whiteAlpha.900" boxShadow="md">
@@ -97,7 +99,7 @@ const QNA = () => {
             </Stack>
           </Box>
           <Box minW={{ md: "60px" }}>
-            <Stack
+            <Button
               onClick={() => {
                 console.log(allQuestions.length);
                 if (questionIndex < allQuestions.length - 1) {
@@ -105,11 +107,13 @@ const QNA = () => {
                 }
               }}
               p="1rem"
+              py="1.9rem"
+              disabled={questionIndex === allQuestions.length - 1}
               backgroundColor="gray.300"
               boxShadow="md"
             >
               <ForwardArrow size="30px" />
-            </Stack>
+            </Button>
           </Box>
         </Stack>
         <Stack
