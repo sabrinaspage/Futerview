@@ -13,8 +13,8 @@ import FutureView from "../svg/futureview.svg";
 import SpeechRecognition from "../components/SpeechRecognition";
 import { db } from "../firebase/firebase-setup";
 import { collection, getDocs } from "firebase/firestore";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const BackArrow = chakra(FaArrowLeft);
 const ForwardArrow = chakra(FaArrowRight);
@@ -22,10 +22,10 @@ const ForwardArrow = chakra(FaArrowRight);
 const QNA = () => {
   const [transcriptData, setTranscriptData] = useState("");
   const [transcript, setTranscript] = useState("");
-
   const [allQuestions, setAllQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [question, setQuestion] = useState("");
+  const history = useHistory();
 
   const TranscriptState = () => {
     if (transcriptData.status === "completed") {
@@ -144,6 +144,9 @@ const QNA = () => {
             variant="solid"
             colorScheme="teal"
             width="full"
+            onClick={() => {
+              history.push("/results");
+            }}
           >
             View Results
           </Button>
