@@ -1,6 +1,7 @@
 import * as React from "react";
-import Dashboard from "./components/Dashboard";
 import Login from "./pages/login";
+import Results from "./pages/results";
+import QNA from "./pages/qna";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Registration from "./pages/registration";
@@ -10,17 +11,17 @@ function App() {
     <>
       <BrowserRouter forceRefresh={true}>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/registration">
+          <Route exact path="/registration">
             <Registration />
           </Route>
-          <Route path="/results">
-            <Registration />
+          <Route exact path="/results">
+            <Results />
           </Route>
-          <Route path="/qna">
-            <Registration />
+          <Route exact path="/qna">
+            <QNA />
           </Route>
         </Switch>
       </BrowserRouter>
