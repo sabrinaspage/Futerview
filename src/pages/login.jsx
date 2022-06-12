@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <Box>
-      <img style={{ paddingLeft: "15px" }} src={FutureView} />
+      <img alt="futureview" style={{ paddingLeft: "15px" }} src={FutureView} />
       <Flex
         flexDirection="column"
         width="100wh"

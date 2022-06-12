@@ -32,7 +32,11 @@ const Results = () => {
   return (
     <Box bgColor="gray.200">
       <Flex>
-        <img style={{ paddingLeft: "15px" }} src={FutureView} />
+        <img
+          alt="futureview"
+          style={{ paddingLeft: "15px" }}
+          src={FutureView}
+        />
         <Box ml="auto">
           <Button
             bgColor="transparent"
