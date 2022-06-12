@@ -13,7 +13,11 @@ const assembly = axios.create({
   },
 });
 
-const SpeechRecognition = () => {
+const SpeechRecognition = (
+  transcriptData,
+  setTranscriptData,
+  setTranscript
+) => {
   const recorder = useRef(null);
   const audioPlayer = useRef(null);
   const [blobURL, setBlobUrl] = useState(null);
@@ -51,8 +55,6 @@ const SpeechRecognition = () => {
 
   const [uploadURL, setUploadURL] = useState("");
   const [transcriptID, setTranscriptID] = useState("");
-  const [transcriptData, setTranscriptData] = useState("");
-  const [transcript, setTranscript] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const submitTranscriptionHandler = () => {
@@ -100,16 +102,6 @@ const SpeechRecognition = () => {
     }
   }, [audioFile]);
 
-  const TranscriptState = () => {
-    if (transcriptData.status === "completed") {
-      return <p>{transcript}</p>;
-    }
-    if (transcriptData.status === "processing") {
-      return <Spinner />;
-    }
-    return <p>Start!</p>;
-  };
-
   return (
     <Flex flexDirection="column">
       <Center>
@@ -132,11 +124,9 @@ const SpeechRecognition = () => {
           STOP
         </Button>
         <Button ml={2} onClick={submitTranscriptionHandler}>
-          SUBMIT
+          GET TRANSCRIPT
         </Button>
       </Center>
-
-      <TranscriptState />
     </Flex>
   );
 };

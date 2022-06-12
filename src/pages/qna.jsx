@@ -1,4 +1,13 @@
-import { Flex, Stack, chakra, Box, Text, Center } from "@chakra-ui/react";
+import {
+  Flex,
+  Stack,
+  chakra,
+  Box,
+  Text,
+  Center,
+  Button,
+  Spinner,
+} from "@chakra-ui/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import FutureView from "../svg/futureview.svg";
 import SpeechRecognition from "../components/SpeechRecognition";
@@ -11,9 +20,22 @@ const BackArrow = chakra(FaArrowLeft);
 const ForwardArrow = chakra(FaArrowRight);
 
 const QNA = () => {
+  const [transcriptData, setTranscriptData] = useState("");
+  const [transcript, setTranscript] = useState("");
+
   const [allQuestions, setAllQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [question, setQuestion] = useState("");
+
+  const TranscriptState = () => {
+    if (transcriptData.status === "completed") {
+      return <p>{transcript}</p>;
+    }
+    if (transcriptData.status === "processing") {
+      return <Spinner />;
+    }
+    return <p>Start!</p>;
+  };
 
   useEffect(() => {
     const setNewQuestion = async () => {
@@ -103,9 +125,24 @@ const QNA = () => {
               backgroundColor="whiteAlpha.900"
               boxShadow="md"
             >
-              <SpeechRecognition />
+              <SpeechRecognition
+                transcriptData={transcriptData}
+                setTranscript={setTranscript}
+                setTranscriptData={setTranscriptData}
+              />
+              <TranscriptState />
             </Stack>
           </Box>
+          <Button
+            borderRadius={0}
+            bg="#AABFEE"
+            type="submit"
+            variant="solid"
+            colorScheme="teal"
+            width="full"
+          >
+            View Results
+          </Button>
         </Stack>
       </Flex>
     </Box>
