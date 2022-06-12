@@ -27,6 +27,8 @@ const Results = () => {
     setNewQuestion();
   }, []);
 
+  const average = (array) => array.reduce((a, b) => a + b / array.length, 0);
+
   return (
     <Box bgColor="gray.200">
       <Flex>
@@ -54,9 +56,10 @@ const Results = () => {
         <Heading mb="2"> Results </Heading>
         <Box minW={{ md: "500px" }}>
           <List width="300px">
-            {ratings.map((rating) => {
+            {ratings.map((rating, index) => {
               return (
                 <ListItem
+                  key={index}
                   bgColor="white"
                   width="500px"
                   py={2}
@@ -67,7 +70,7 @@ const Results = () => {
                 >
                   <Flex>
                     {rating.question}
-                    <Box ml="auto">{rating.rating} 8%</Box>
+                    <Box ml="auto">{rating.rating}%</Box>
                   </Flex>
                 </ListItem>
               );
@@ -83,7 +86,9 @@ const Results = () => {
             >
               <Flex>
                 <Text fontWeight="bold">Average</Text>
-                <Box ml="auto">8%</Box>
+                <Box ml="auto">
+                  {average([...ratings.map((key) => key.rating)])}%
+                </Box>
               </Flex>
             </ListItem>
           </List>

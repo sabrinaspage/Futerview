@@ -22,13 +22,17 @@ const ForwardArrow = chakra(FaArrowRight);
 const QNA = () => {
   const [transcriptData, setTranscriptData] = useState("");
   const [transcript, setTranscript] = useState("");
+  const [questionId, setQuestionId] = useState("");
   const [allQuestions, setAllQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [question, setQuestion] = useState("");
   const history = useHistory();
 
   const TranscriptState = () => {
-    if (transcriptData.status === "completed") {
+    if (
+      transcriptData.status === "completed" ||
+      transcriptData.status === "unavailable"
+    ) {
       return <p>{transcript}</p>;
     }
     if (transcriptData.status === "processing") {
@@ -53,6 +57,7 @@ const QNA = () => {
   useEffect(() => {
     const setNewQuestion = async () => {
       const querySnapshot = await getDocs(collection(db, "questions"));
+      setQuestionId(querySnapshot.docs[questionIndex].id);
       setQuestion(querySnapshot.docs[questionIndex].get("question"));
       return querySnapshot;
     };
@@ -117,6 +122,8 @@ const QNA = () => {
                 console.log(allQuestions.length);
                 if (questionIndex < allQuestions.length - 1) {
                   setQuestionIndex(questionIndex + 1);
+                  setTranscript("");
+                  setTranscriptData({});
                 }
               }}
               p="1rem"
@@ -143,6 +150,7 @@ const QNA = () => {
               boxShadow="md"
             >
               <SpeechRecognition
+                questionId={questionId}
                 transcriptData={transcriptData}
                 setTranscript={setTranscript}
                 setTranscriptData={setTranscriptData}

@@ -2,6 +2,15 @@ import MicRecorder from "mic-recorder-to-mp3";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Button, Spinner, Center, Flex } from "@chakra-ui/react";
+import { db } from "../firebase/firebase-setup";
+import {
+  doc,
+  updateDoc,
+  getDoc,
+  getDocs,
+  collection,
+} from "firebase/firestore";
+import stringSimilarity from "string-similarity";
 
 // Set AssemblyAI Axios Header
 const assembly = axios.create({
@@ -13,11 +22,12 @@ const assembly = axios.create({
   },
 });
 
-const SpeechRecognition = (
+const SpeechRecognition = ({
+  questionId,
   transcriptData,
   setTranscriptData,
-  setTranscript
-) => {
+  setTranscript,
+}) => {
   const recorder = useRef(null);
   const audioPlayer = useRef(null);
   const [blobURL, setBlobUrl] = useState(null);
@@ -82,6 +92,30 @@ const SpeechRecognition = (
   };
 
   useEffect(() => {
+    const getRating = async (text) => {
+      const questionRef = doc(db, "questions", questionId);
+      const questionSnap = await getDoc(questionRef);
+
+      if (text && questionSnap.exists()) {
+        const bestAnswers = questionSnap.data().best_answers;
+
+        var matches = stringSimilarity.findBestMatch(text, bestAnswers);
+        return (matches.bestMatch.rating * 100).toFixed(2);
+      }
+
+      return 0;
+    };
+
+    const storeAnswer = async () => {
+      const answeredQuestionRef = doc(db, "answeredQuestions", questionId);
+      await updateDoc(answeredQuestionRef, {
+        answer: transcriptData.text,
+        rating: await getRating(transcriptData.text),
+      });
+      const answeredQuestionSnap = await getDoc(answeredQuestionRef);
+      console.log(answeredQuestionSnap.data());
+    };
+
     const interval = setInterval(() => {
       if (transcriptData.status !== "completed" && isLoading) {
         checkStatusHandler();
@@ -90,6 +124,10 @@ const SpeechRecognition = (
         setTranscript(transcriptData.text);
       }
     }, 1000);
+
+    if (transcriptData.status === "completed" && transcriptData.text) {
+      storeAnswer(transcriptData.text);
+    }
     return () => clearInterval(interval);
   });
 
