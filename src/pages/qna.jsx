@@ -62,7 +62,20 @@ const QNA = () => {
 
   return (
     <Box bgColor="gray.200">
-      <img style={{ paddingLeft: "15px" }} src={FutureView} />
+      <Flex>
+        <img style={{ paddingLeft: "15px" }} src={FutureView} />
+        <Box ml="auto">
+          <Button
+            bgColor="transparent"
+            size={"lg"}
+            onClick={() => {
+              history.push("/login");
+            }}
+          >
+            Logout
+          </Button>
+        </Box>
+      </Flex>
       <Flex
         flexDirection="column"
         width="100wh"

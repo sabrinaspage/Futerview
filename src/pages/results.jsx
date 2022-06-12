@@ -5,16 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import {
-  List,
-  ListItem,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  StatGroup,
-} from "@chakra-ui/react";
+import { List, ListItem, Text } from "@chakra-ui/react";
 
 const Results = () => {
   const [ratings, setRatings] = useState([]);
@@ -91,7 +82,7 @@ const Results = () => {
               borderRadius="5px"
             >
               <Flex>
-                Average
+                <Text fontWeight="bold">Average</Text>
                 <Box ml="auto">8%</Box>
               </Flex>
             </ListItem>
